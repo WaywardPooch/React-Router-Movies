@@ -5,9 +5,7 @@ export default function MovieList(props) {
   return (
     <div className="movie-list">
       {props.movies.map((movie) => (
-        <Link key={movie.id} to={`/movies/${movie.id}`}>
-          <MovieDetails movie={movie} />
-        </Link>
+        <MovieDetails key={movie.id} movie={movie} />
       ))}
     </div>
   );
@@ -17,14 +15,16 @@ function MovieDetails(props) {
   const { title, director, metascore } = props.movie;
 
   return (
-    <div className="movie-card">
-      <h2>{title}</h2>
-      <div className="movie-director">
-        Director: <em>{director}</em>
+    <Link to={`/movies/${props.movie.id}`}>
+      <div className="movie-card">
+        <h2>{title}</h2>
+        <div className="movie-director">
+          Director: <em>{director}</em>
+        </div>
+        <div className="movie-metascore">
+          Metascore: <strong>{metascore}</strong>
+        </div>
       </div>
-      <div className="movie-metascore">
-        Metascore: <strong>{metascore}</strong>
-      </div>
-    </div>
+    </Link>
   );
 }
